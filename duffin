@@ -34,7 +34,7 @@ def byHash():
         hls.append(hsh)
 def opt():
     print("options:")
-    print("   byhash         find duplicate files by hash")
+    print("   find           find duplicate files by hash")
     print("   h              print this message")
     print("   c              clear the screen")
     print("   q              quit")
