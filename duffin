@@ -1,0 +1,51 @@
+#!/usr/bin/python3
+import os
+
+prompt = "duffin> "
+
+print("\
+          _o_\n\
+      _o_~   \\o-\n\
+    _~    \\o-   ')\n\
+  (`o  /   ')     ).\n\
+ (   (   o    ).----.\n\
+.--_______------.   /\n\
+\\  \\      /     /  |\n\
+ |  |    |     |  |\n\
+  | |   | ' | |   |  Duffin-0.0\n\
+  | | | | | | |__/   by Dripbert\n\
+   \\_________/       MIT License")
+
+def byHash():
+    dr = input("directory ['.']> ")
+    if dr == "":  dr = "."
+    dr += "/"
+    if not os.path.exists(dr): print(dr + ": no such directory");return
+    ls = os.listdir(dr)
+    files = []
+    for f in ls:
+        if os.path.isfile(dr + f): files.append(f)
+    hls = []
+    for f in files:
+        hsh = os.popen('sha1sum -z ' + dr + f).read().split(' ')[0]
+        if hsh in hls:
+            print(f + " " * (15 - len(f)), end="")
+            print(files[hls.index(hsh)])
+        hls.append(hsh)
+def opt():
+    print("options:")
+    print("   byhash         find duplicate files by hash")
+    print("   h              print this message")
+    print("   c              clear the screen")
+    print("   q              quit")
+    
+
+while True:
+    arg = input(prompt)
+    if   arg == "q": break
+    elif arg == "find": byHash()
+    elif arg == "h": opt()
+    elif arg == "c": print('\x1b[2J\x1b[H', end="")
+    else: print(arg + " not found");opt()
+
+print('\x1b[2J\x1b[H', end="")
